@@ -23,6 +23,18 @@ export class Form {
       textField.value = value;
     }
   }
+
+  setOrder(name: string, order: number) {
+    const iTextField = this.textFields.findIndex(tf => tf.name === name);
+    if (iTextField < 0) {
+      return;
+    }
+
+    // Remove the found element from the list and re-insert it @ order
+    const textField = this.textFields[iTextField];
+    this.textFields.splice(iTextField, 1);
+    this.textFields.splice(order, 0, textField);
+  }
 }
 
 

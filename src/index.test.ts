@@ -40,5 +40,33 @@ describe('The Form', () => {
     expect(tf!.value).toBe('aNewValue');
   });
 
-  
+  it('Can update a textfield to a new order at the end', () => {
+    const form = new Form('someActionUrl');
+    form.addTextField('anyLabel1', 'a', 'anyType');
+    form.addTextField('anyLabel2', 'b', 'anyType');
+    form.addTextField('anyLabel3', 'c', 'anyType');
+
+    form.setOrder('c', 0);
+
+    expect(form.textFields).toMatchObject([
+      new TextField('anyLabel3', 'c', 'anyType'),
+      new TextField('anyLabel1', 'a', 'anyType'),
+      new TextField('anyLabel2', 'b', 'anyType')
+    ])
+  });
+
+  it('Can update a textfield to a new order at the beginning', () => {
+    const form = new Form('someActionUrl');
+    form.addTextField('anyLabel1', 'a', 'anyType');
+    form.addTextField('anyLabel2', 'b', 'anyType');
+    form.addTextField('anyLabel3', 'c', 'anyType');
+
+    form.setOrder('a', 2);
+
+    expect(form.textFields).toMatchObject([
+      new TextField('anyLabel2', 'b', 'anyType'),
+      new TextField('anyLabel3', 'c', 'anyType'),
+      new TextField('anyLabel1', 'a', 'anyType')
+    ])
+  })
 });
