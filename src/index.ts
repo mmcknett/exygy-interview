@@ -2,7 +2,6 @@
 export class Form {
   actionURL: string
   textFields: TextField[]
-  lastOrder: number = 0
 
   constructor(actionURL: string) {
     this.actionURL = actionURL;
@@ -10,9 +9,7 @@ export class Form {
   }
 
   addTextField(label: string, name: string, type: string, value?: string) {
-    // NOTE: this.lastOrder may interfere with later ACs.
-    this.textFields.push(new TextField(label, name, this.lastOrder, type, value));
-    this.lastOrder += 1;
+    this.textFields.push(new TextField(label, name, type, value));
   }
 
   findTextFieldByName(name: string) {
@@ -32,14 +29,12 @@ export class Form {
 export class TextField {
   label: string
   name: string
-  order: number
   type: string
   value?: string
 
-  constructor(label: string, name: string, order: number, type: string, value?: string) {
+  constructor(label: string, name: string, type: string, value?: string) {
     this.label = label;
     this.name = name;
-    this.order = order;
     this.type = type;
     if (value) {
       this.value = value
